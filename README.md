@@ -15,7 +15,7 @@ Este repositorio contiene los archivos necesarios para la implementación de una
 
    ```bash
    git clone [https://github.com/facundoalmiento/controldepesaje-Almiento.git]
-   cd control-pesajes-Almiento
+   cd controldepesaje-Almiento
    ```
 
 2. Ejecutar el script SQL en un gestor de bases de datos compatible con SQL (por ejemplo, MySQL, PostgreSQL):
