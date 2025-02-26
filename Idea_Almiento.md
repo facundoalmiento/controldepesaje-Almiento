@@ -17,32 +17,32 @@ A continuación se presenta el diagrama E-R que representa la estructura de la b
 
 ![Diagrama E-R](diagramas/Diagrama_er_controldepesajes.png)
 
-## Listado de Tablas
+## # Listado de Tablas
 
 ### Tabla: Titulares
 - Descripción: Almacena información sobre los titulares de los vehículos.
 - Campos:
   - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único del titular.
-  - nombre (VARCHAR(100), NOT NULL): Nombre del titular.
-  - dni_cuit (VARCHAR(20), NOT NULL, UNIQUE): DNI o CUIT del titular.
-  - telefono (VARCHAR(20)): Teléfono de contacto del titular.
+  - nombre (VARCHAR(255), NOT NULL): Nombre del titular.
   - direccion (VARCHAR(255)): Dirección del titular.
-
-### Tabla: Vehículos
-- Descripción: Almacena información sobre los vehículos.
-- Campos:
-  - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único del vehículo.
-  - patente (VARCHAR(10), NOT NULL, UNIQUE): Patente del vehículo.
-  - modelo (VARCHAR(50), NOT NULL): Modelo del vehículo.
-  - tipo (VARCHAR(50), NOT NULL): Tipo de vehículo (por ejemplo, "Camión", "Acoplado").
-  - titular_id (INT, NOT NULL, FOREIGN KEY): Identificador del titular del vehículo.
+  - telefono (VARCHAR(50)): Teléfono de contacto del titular.
+  - email (VARCHAR(100)): Email del titular.
 
 ### Tabla: Puntos de Control
 - Descripción: Almacena información sobre los puntos de control de pesaje.
 - Campos:
   - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único del punto de control.
-  - nombre (VARCHAR(100), NOT NULL): Nombre del punto de control.
+  - nombre (VARCHAR(255), NOT NULL): Nombre del punto de control.
   - ubicacion (VARCHAR(255), NOT NULL): Ubicación del punto de control.
+
+### Tabla: Vehículos
+- Descripción: Almacena información sobre los vehículos.
+- Campos:
+  - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único del vehículo.
+  - patente (VARCHAR(50), NOT NULL): Patente del vehículo.
+  - modelo (VARCHAR(50), NOT NULL): Modelo del vehículo.
+  - tipo (VARCHAR(50), NOT NULL): Tipo de vehículo.
+  - titular_id (INT, NOT NULL, FOREIGN KEY): Identificador del titular del vehículo.
 
 ### Tabla: Pesajes
 - Descripción: Almacena información sobre los pesajes de los vehículos.
@@ -66,22 +66,6 @@ A continuación se presenta el diagrama E-R que representa la estructura de la b
 }
 ```
 
-### Tabla: Infracciones
-- Descripción: Almacena información sobre las infracciones por exceso de peso.
-- Campos:
-  - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único de la infracción.
-  - pesaje_id (INT, NOT NULL, FOREIGN KEY): Identificador del pesaje.
-  - titular_id (INT, NOT NULL, FOREIGN KEY): Identificador del titular.
-  - exceso_peso (DECIMAL(10,2), NOT NULL): Exceso de peso en toneladas.
-  - multa (DECIMAL(10,2), NOT NULL): Monto de la multa en moneda local.
-
-### Tabla: Reincidencias
-- Descripción: Almacena información sobre la reincidencia de infracciones.
-- Campos:
-  - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único de la reincidencia.
-  - vehiculo_id (INT, NOT NULL, FOREIGN KEY): Identificador del vehículo.
-  - cantidad_infracciones (INT, NOT NULL): Cantidad de infracciones.
-
 ### Tabla: Fotos
 - Descripción: Almacena información sobre las fotos tomadas durante los pesajes.
 - Campos:
@@ -89,6 +73,14 @@ A continuación se presenta el diagrama E-R que representa la estructura de la b
   - pesaje_id (INT, NOT NULL, FOREIGN KEY): Identificador del pesaje.
   - url_foto (VARCHAR(255), NOT NULL): URL de la foto.
   - timestamp (DATETIME, NOT NULL): Timestamp de la foto.
+
+### Tabla: Infracciones
+- Descripción: Almacena información sobre las infracciones detectadas durante los pesajes.
+- Campos:
+  - id (INT, PRIMARY KEY, AUTO_INCREMENT): Identificador único de la infracción.
+  - pesaje_id (INT, NOT NULL, FOREIGN KEY): Identificador del pesaje.
+  - tipo_infraccion (VARCHAR(255), NOT NULL): Tipo de infracción.
+  - descripcion (TEXT, NOT NULL): Descripción de la infracción.
 
 ## Archivo .sql
 El script de creación de la base de datos y tablas está disponible en el siguiente repositorio de GitHub:
